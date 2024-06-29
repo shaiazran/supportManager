@@ -1,0 +1,193 @@
+{% extends layout_path %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}Settings Store Details - eCommerce{% endblock %}
+
+{% block vendor_css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'vendor/libs/select2/select2.css' %}" />
+{% endblock vendor_css %}
+
+{% block vendor_js %}
+  {{ block.super }}
+  <script src="{% static 'vendor/libs/select2/select2.js' %}"></script>
+  <script src="{% static 'vendor/libs/cleavejs/cleave.js' %}"></script>
+  <script src="{% static 'vendor/libs/cleavejs/cleave-phone.js' %}"></script>
+{% endblock vendor_js %}
+
+{% block page_js %}
+  {{ block.super }}
+  <script src="{% static 'js/app-ecommerce-settings.js' %}"></script>
+{% endblock page_js %}
+
+{% block content %}
+  <div class="row g-6">
+    <!-- Navigation -->
+    <div class="col-12 col-lg-4">
+      <div class="d-flex justify-content-between flex-column mb-4 mb-md-0">
+        <h5 class="mb-4">Getting Started</h5>
+        <ul class="nav nav-align-left nav-pills flex-column">
+          <li class="nav-item mb-1">
+            <a class="nav-link active" href="javascript:void(0);">
+              <i class="ti ti-building-store ti-sm me-1_5"></i>
+              <span class="align-middle">Store details</span>
+            </a>
+          </li>
+          <!-- Other navigation items -->
+        </ul>
+      </div>
+    </div>
+    <!-- /Navigation -->
+
+    <!-- Options -->
+    <div class="col-12 col-lg-8 pt-6 pt-lg-0">
+      <form method="post" action="{% url 'shop_create' %}">
+        {% csrf_token %}
+        <div class="tab-content p-0">
+          <!-- Store Details Tab -->
+          <div class="tab-pane fade show active" id="store_details" role="tabpanel">
+            <div class="card mb-6">
+              <div class="card-header">
+                <h5 class="card-title m-0">Profile</h5>
+              </div>
+              <div class="card-body">
+                <div class="row mb-6 g-6">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label mb-1" for="ecommerce-settings-details-name">Store Name</label>
+                    {{ form.name }}
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label mb-1" for="ecommerce-settings-details-phone">Phone</label>
+                    {{ form.phone }}
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label mb-1" for="ecommerce-settings-details-email">Store contact email</label>
+                    {{ form.email }}
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label mb-1" for="ecommerce-settings-sender-email">Sender email</label>
+                    {{ form.sender_email }}
+                  </div>
+                </div>
+
+                <div class="alert d-flex align-items-center alert-warning mb-0 h5" role="alert">
+                <span class="alert-icon me-4 rounded-2">
+                  <i class="ti ti-bell ti-md"></i>
+                </span>
+                  Confirm that you have access to johndoe@gmail.com in sender email settings.
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-6">
+              <div class="card-header">
+                <h5 class="card-title m-0">Billing information</h5>
+              </div>
+              <div class="card-body">
+                <div class="row g-6">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label mb-1" for="business-name">Legal business name</label>
+                    {{ form.legal_business_name }}
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label mb-1" for="country_region">Country/region</label>
+                    {{ form.country_region }}
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label mb-1" for="bill_address">Address</label>
+                    {{ form.address }}
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label mb-1" for="apa_suite">Apartment, suite, etc.</label>
+                    {{ form.apartment_suite }}
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label class="form-label mb-1" for="bill_city">City</label>
+                    {{ form.city }}
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label class="form-label mb-1" for="bill_state">State</label>
+                    {{ form.state }}
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label class="form-label mb-1" for="bill_pincode">PIN Code</label>
+                    {{ form.pin_code }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-6">
+              <div class="card-header">
+                <div class="card-title mb-0">
+                  <h5 class="m-0">Time zone and units of measurement</h5>
+                  <p class="my-0 card-subtitle">Used to calculate product prices, shipping weighs, and order times.</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row g-6">
+                  <div class="col-12">
+                    <label for="timeZones" class="form-label mb-1">Time zone</label>
+                    {{ form.timezone }}
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="unitSystemDropdown" class="form-label mb-1">Unit system</label>
+                    {{ form.unit_system }}
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="weightUnits" class="form-label mb-1">Default weight unit</label>
+                    {{ form.weight_unit }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-6">
+              <div class="card-header">
+                <div class="card-title mb-0">
+                  <h5 class="m-0">Store currency</h5>
+                  <p class="my-0 card-subtitle">The currency your products are sold in.</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div>
+                  <label for="currency-store" class="form-label mb-1">Store currency</label>
+                  {{ form.currency }}
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-6">
+              <div class="card-header">
+                <div class="card-title mb-0">
+                  <h5 class="m-0">Order id format</h5>
+                  <p class="my-0 card-subtitle">Shown on the Orders page, customer pages, and customer order notifications to identify orders.</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row g-6">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label mb-1" for="ecommerce-settings-details-prefix">Prefix</label>
+                    {{ form.order_prefix }}
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label mb-1" for="ecommerce-settings-sender-suffix">Suffix</label>
+                    {{ form.order_suffix }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-4">
+              <button type="reset" class="btn btn-label-secondary">Discard</button>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- /Options-->
+  </div>
+{% endblock %}
